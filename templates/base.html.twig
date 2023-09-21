@@ -5,12 +5,32 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
+        <link rel="stylesheet" href="">
         {% endblock %}
 
-        {% block javascripts %}
-        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+<nav>
+    <ul>
+        <li><a href="">Accueil</a></li>
+        <li><a href="">FORMATIONS</a></li>
+        <li><a href="">SESSIONS</a></li>
+        <li><a href="">STAGIAIRES</a></li>
+        <li><a href="">FORMATEURS</a></li>
+        <li><a href="">CATEGORIES</a></li>
+    </ul>
+</nav>
+
+        {% block body %}
+        
+        {% endblock %}
+
+
+        {% block javascripts %}
+        <script src=""></script>
+        {% endblock %}
+        <footer>
+
+        </footer>
     </body>
 </html>
