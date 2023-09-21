@@ -17,6 +17,9 @@
 
 <h2>Session prévues</h2>
 <ul>
+{% for session in stagiaire.sessions %}
+    <li>{{ session }} ({{ session.formateur }})</li>
+{% endfor %}
 </ul>
 
 {% endblock %}
