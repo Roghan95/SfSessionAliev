@@ -148,4 +148,14 @@ class Formateur
 
         return $this;
     }
+
+    public function __toString() {
+        return $this->prenomFormateur. " " . $this->nomFormateur;
+    }
+
+    public function getAge() : ?string {
+        $now = new \DateTime();
+        $interval = $this->dateNaissance->diff($now);
+        return $interval->format("%Y");
+    }
 }

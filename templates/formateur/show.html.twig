@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche de {{ formateur }}{% endblock %}
+
+{% block body %}
+
+<h1>Fiche de formateur</h1>
+
+<strong>{{ formateur }}</strong>
+<ul style="list-style: none;">
+    <li>Sexe : {{ formateur.sexe }} </li>
+    <li>Date de naissance : {{ formateur.dateNaissance|date("d-m-Y") }} ({{ formateur.age }} ans)</li>
+    <li>Ville : STRASBOURG</li>
+    <li>Courriel : {{ formateur.email }}</li>
+    <li>Téléphone : {{ formateur.telephone }}</li>
+</ul>
+
+{% endblock %}

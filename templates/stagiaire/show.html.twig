@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche de {{ stagiaire }}{% endblock %}
+
+{% block body %}
+
+<h1>Fiche de stagiaire</h1>
+
+<strong>{{ stagiaire }}</strong>
+<ul style="list-style: none;">
+    <li>Sexe : {{ stagiaire.sexe }} </li>
+    <li>Date de naissance : {{ stagiaire.dateNaissance|date("d-m-Y") }} ({{ stagiaire.age }} ans)</li>
+    <li>Ville : STRASBOURG</li>
+    <li>Courriel : {{ stagiaire.email }}</li>
+    <li>Téléphone : {{ stagiaire.telephone }}</li>
+</ul>
+
+<h2>Session prévues</h2>
+<ul>
+</ul>
+
+{% endblock %}
