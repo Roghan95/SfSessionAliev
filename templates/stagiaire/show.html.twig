@@ -15,11 +15,42 @@
     <li>Téléphone : {{ stagiaire.telephone }}</li>
 </ul>
 
-<h2>Session prévues</h2>
-<ul>
-{% for session in stagiaire.sessions %}
+<h2>Sessions</h2>
+{# <ul>
     <li>{{ session }} ({{ session.formateur }})</li>
-{% endfor %}
-</ul>
+</ul> #}
 
+<table border="1">
+    <thead>
+        <tr>
+            <th>Statut</th>
+            <th>Formation</th>
+            <th>Session</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Inscrits</th>
+            <th>Désinscrire</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for session in stagiaire.sessions %}
+        <tr>
+            <td>
+                {% if session.stagiaires|length == session.nbPlaces %}
+                Session complète
+                {% else %}
+                Ouvert
+                {% endif %}
+            </td>
+            <td>{{ session.formation }}</td>
+            <td><a href="{{ path('show_session', {'id' : session.id}) }}">{{ session }}</a></td>
+            <td>{{ session.dateDebut|date("d-m-Y") }}</td>
+            <td>{{ session.dateFin|date("d-m-Y") }}</td>
+            <td>{{ session.stagiaires|length }}/{{ session.nbPlaces }}</td>
+            <td><a href="">Désinscrire</a></td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

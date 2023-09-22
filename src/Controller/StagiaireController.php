@@ -6,6 +6,7 @@ use App\Entity\Stagiaire;
 use App\Repository\StagiaireRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StagiaireController extends AbstractController
@@ -20,11 +21,11 @@ class StagiaireController extends AbstractController
     }
 
     #[Route('/stagiaire/{id}', name: 'show_stagiaire')]
-    public function showStagiaire(Stagiaire $stagiaire) : Response {
+    public function showStagiaire(Stagiaire $stagiaire, Session $sessions) : Response {
         
         return $this->render('stagiaire/show.html.twig', [
-            'stagiaire' => $stagiaire
+            'stagiaire' => $stagiaire,
+            'sessions' => $sessions
         ]);
     }
-
 }

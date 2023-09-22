@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        <link rel="stylesheet" href="">
-        {% endblock %}
 
-    </head>
-    <body>
-<nav>
-    <ul>
-        <li><a href="">Accueil</a></li>
-        <li><a href="">FORMATIONS</a></li>
-        <li><a href="{{ path('app_session') }}">SESSIONS</a></li>
-        <li><a href="{{ path('app_stagiaire') }}">STAGIAIRES</a></li>
-        <li><a href="{{ path('app_formateur') }}">FORMATEURS</a></li>
-        <li><a href="">CATEGORIES</a></li>
-    </ul>
-</nav>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {% endblock %}
 
-        {% block body %}
+</head>
 
-        {% endblock %}
+<body>
+    <nav>
+        <ul style="list-style: none; display:flex; gap:20px;">
+            <li><a href="{{ path('app_home') }}">ACCUEIL</a></li>
+            <li><a href="{{ path('app_formation') }}">FORMATIONS</a></li>
+            <li><a href="{{ path('app_session') }}">SESSIONS</a></li>
+            <li><a href="{{ path('app_stagiaire') }}">STAGIAIRES</a></li>
+            <li><a href="{{ path('app_formateur') }}">FORMATEURS</a></li>
+            <li><a href="{{ path('app_module') }}">MODULES</a></li>
+            <li><a href="">CATEGORIES</a></li>
+        </ul>
+    </nav>
+
+    {% block body %}
+
+    {% endblock %}
 
 
-        {% block javascripts %}
-        <script src=""></script>
-        {% endblock %}
-        <footer>
+    {% block javascripts %}
+    <script src=""></script>
+    {% endblock %}
+    <footer>
 
-        </footer>
-    </body>
+    </footer>
+</body>
+
 </html>

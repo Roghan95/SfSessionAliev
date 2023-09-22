@@ -4,4 +4,34 @@
 
 {% block body %}
 <h1>Liste des sessions</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Statut</th>
+            <th>Formation</th>
+            <th>Session</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Inscrits</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for session in sessions %}
+        <tr>
+            <td>Ouvert</td>
+            <td>{{session.formation}}</td>
+            <td><a href="{{ path('show_session', {'id' : session.id}) }}">{{ session.nomSession }}</a></td>
+            <td>{{ session.dateDebut|date("d/m/Y") }}</td>
+            <td>{{ session.dateFin|date("d/m/Y") }}</td>
+            <td>{{ session.stagiaires|length }}/{{ session.nbPlaces }}</td>
+            <td><a style="text-decoration: none; color:rgb(255, 187, 0);" href="#">Editer</a> / <a
+                    style="text-decoration: none; color:rgb(255, 187, 0);" href="#">Suppr</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
+
+{# {{ path('show_formation', {'id' : formation.id}) }} #}
