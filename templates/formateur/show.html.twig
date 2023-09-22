@@ -25,6 +25,7 @@
             <th>Date de début</th>
             <th>Date de fin</th>
             <th>Inscrits</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +37,7 @@
             <td>{{ session.dateFin|date("d-m-Y") }}</td>
             {# Le nombre de places qui reste selon le nombre de stagiaires inscrits #}
             <td>{{ session.stagiaires|length }}/{{ session.nbPlaces }}</td>
+            <td><a href="">Edit</a> | <a href="">Suppr</a></td>
         </tr>
         {% endfor %}
     </tbody>
