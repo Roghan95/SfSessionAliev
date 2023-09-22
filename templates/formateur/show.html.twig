@@ -15,4 +15,29 @@
     <li>Téléphone : {{ formateur.telephone }}</li>
 </ul>
 
+<h2>Sessions</h2>
+{# Table avec les sessions du formateur et les dates de début et de fin #}
+<table border="1" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Formation</th>
+            <th>Session</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Inscrits</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for session in formateur.sessions %}
+        <tr>
+            <td>{{ session.formation.nomFormation }}</td>
+            <td><a href="">{{ session }}</a></td>
+            <td>{{ session.dateDebut|date("d-m-Y") }}</td>
+            <td>{{ session.dateFin|date("d-m-Y") }}</td>
+            {# Le nombre de places qui reste selon le nombre de stagiaires inscrits #}
+            <td>{{ session.stagiaires|length }}/{{ session.nbPlaces }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
