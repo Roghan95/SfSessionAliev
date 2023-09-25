@@ -7,9 +7,12 @@
 
 <h1>Liste des formations</h1>
 
-{% for formation in formations %}
+<div>
 
-<a href="">{{ formation.nomFormation }}</a><br>
-
-{% endfor %}
+    {% for formation in formations %}
+    <ul>
+        <li><a href="{{ path('show_formation', {'id' : formation.id }) }}">{{ formation }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

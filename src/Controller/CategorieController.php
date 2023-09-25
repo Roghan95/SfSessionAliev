@@ -15,4 +15,12 @@ class CategorieController extends AbstractController
             'controller_name' => 'CategorieController',
         ]);
     }
+
+    #[Route('/categorie/{id}', name: 'show_categorie')]
+    public function showCategorie(Categorie $categorie) : Response {
+        
+        return $this->render('categorie/show.html.twig', [
+            'categorie' => $categorie
+        ]);
+    }
 }

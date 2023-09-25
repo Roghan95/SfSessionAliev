@@ -31,4 +31,6 @@ class FormateurController extends AbstractController
             'formateur' => $formateur
         ]);
     }
+
+    
 }
