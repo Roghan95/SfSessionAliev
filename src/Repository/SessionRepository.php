@@ -72,4 +72,54 @@ class SessionRepository extends ServiceEntityRepository
         $query = $sub->getQuery();
         return $query->getResult();
     }
+
+    // Afficher les modules non programmée
+    // public function findModuleNotIn($module_id) {
+    //     $em = $this->getEntityManager();
+    //     $sub = $em->createQueryBuilder();
+
+    //     $qb = $sub;
+
+    //     $qb->select('m')
+    //         ->from('App\Entity\Module', 'p')
+    //         ->leftJoin('p.programmes', 'pr')
+    //         ->leftJoin('m.module', 'mo')
+    //         ->where('pr.id = :id');
+        
+    //     $sub = $em->createQueryBuilder();
+    //     // sélectionner tous les stagiaires qui ne SONT PAS (NOT IN) dans le résultat précédent
+    //     // on obtient donc les modules non programmée
+    //     $sub->select('mo')
+    //         ->from('App\Entity\Module', 'mo')
+    //         ->where($sub->expr()->notIn('mo.id', $qb->getDQL()))
+    //         // requête paramétrée
+    //         ->setParameter('id', $module_id)
+    //         // trier la liste des modules par catégorie
+    //         ->orderBy('mo.categorie'); 
+
+    //         // renvoyer le résultat
+    //         $query = $sub->getQuery();
+    //         return $query->getResult();
+    // }
+
+    public function findNonProgrammer($session_id)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $subQuery = $entityManager->createQueryBuilder();
+        $subQuery->select('IDENTITY(programme.module)')
+            ->from('App\Entity\Programme', 'programme')
+            ->where('programme.session = :session_id');
+
+        $qb = $entityManager->createQueryBuilder();
+        $qb->select('module')
+            ->from('App\Entity\Module', 'module')
+            ->where($qb->expr()->notIn('module.id', $subQuery->getDQL()))
+            ->setParameter('session_id', $session_id)
+            ->orderBy('module.nomModule');
+        // Exécuter la requête
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
 }

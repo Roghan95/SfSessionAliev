@@ -6,7 +6,22 @@
 
 <h1>Session en cours</h1>
 
-
-
-
+<table border="1">
+    <thead>
+        <tr>
+            <th>Session</th>
+            <th>Date début</th>
+            <th>Date fin</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for session in formation.sessions  %}
+        <tr>
+            <td><a href="{{ path('show_session', {'id' : session.id}) }}">{{ session }}</a></td>
+            <td>{{ session.dateDebut|date('d-m-Y') }}</td>
+            <td>{{ session.dateFin|date('d-m-Y') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

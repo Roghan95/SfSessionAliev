@@ -67,13 +67,34 @@
     </thead>
     <tbody>
         {% for programme in session.programmes %}
-            
         <tr>
             <td>{{ programme.module.nomModule }}</td>
             <td>{{ programme.module.categorie }}</td>
             <td>{{ session.dateDebut|date('d-m-Y') }}</td>
             <td>{{ session.dateFin|date('d-m-Y') }}</td>
             <td><a href="">Déprogrammer</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Modules non programmés</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Module</th>
+            <th>Catégorie</th>
+            <th>Durée</th>
+            <th>Programmer</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for module in modulesNotIn %}
+        <tr>
+            <td>{{ module }}</td>
+            <td>{{ module.categorie }}</td>
+            <td><a href=""></a></td>
+            <td><a href="">Programmer</a></td>
         </tr>
         {% endfor %}
     </tbody>

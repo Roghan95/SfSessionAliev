@@ -20,6 +20,7 @@ class SessionController extends AbstractController
         $programmes = $programmeRepository->findAll();
         return $this->render('session/index.html.twig', [
             'sessions' => $sessions,
+            'programmes' => $programmes
         ]);
     }
 
@@ -27,9 +28,11 @@ class SessionController extends AbstractController
     public function show(Session $session, SessionRepository $sessionRepository) : Response {
 
         $stagiairesNotIn = $sessionRepository->findStagiaireNotIn($session->getId());
+        $modulesNotIn = $sessionRepository->findNonProgrammer($session->getId());
         return $this->render('session/show.html.twig', [
             'session' => $session,
-            'stagiairesNotIn' => $stagiairesNotIn
+            'stagiairesNotIn' => $stagiairesNotIn,
+            'modulesNotIn' => $modulesNotIn
         ]);
     }
 }

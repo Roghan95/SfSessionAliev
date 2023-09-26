@@ -32,7 +32,7 @@
         {% for session in formateur.sessions %}
         <tr>
             <td>{{ session.formation.nomFormation }}</td>
-            <td><a href="">{{ session }}</a></td>
+            <td><a href="{{ path('show_session', {'id' : session.id}) }}">{{ session }}</a></td>
             <td>{{ session.dateDebut|date("d-m-Y") }}</td>
             <td>{{ session.dateFin|date("d-m-Y") }}</td>
             {# Le nombre de places qui reste selon le nombre de stagiaires inscrits #}
