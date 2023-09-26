@@ -1,9 +1,81 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Session en cours{% endblock %}
+{% block title %}Détail d'une session{% endblock %}
 
 {% block body %}
 
-<h1>Session en cours</h1>
+<h1>Détail d'une session</h1>
 
+<h2>Plateau numérique</h2>
+
+<ul>
+    <li>Formateur référent : <a href="{{ path('show_formateur', {'id' : session.formateur.id }) }}">{{ session.formateur }}</a></li><br>
+    <li>Date de début : {{ session.dateDebut|date('d-m-Y') }}</li>
+    <li>Date de fin : {{ session.dateFin|date('d-m-Y') }}</li>
+    <li>Nombre de place : {{ session.nbPlaces }}</li>
+    <li>Nombre de places disponible : {{ session.nbPlaces - session.stagiaires|length }}</li>
+    <li>Nombre de modules : {{ session.programmes|length }}</li>
+</ul>
+
+<h2>Stagiaires inscrits</h2>
+
+<table border="1" >
+    <thead>
+        <tr>
+            <th>Stagiaire</th>
+            <th>Désinscrire</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stagiaire in session.stagiaires %}
+        <tr>
+            <td><a href="{{ path('show_stagiaire', {'id' : stagiaire.id }) }}">{{ stagiaire }}</a></td>
+            <td><a href="">Désinscrire</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h2>Stagiaires non inscrits</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Stagiaire</th>
+            <th>Inscrire</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stagiaire in stagiairesNotIn %}
+        <tr>
+            <td><a href="{{ path('show_stagiaire', {'id' : stagiaire.id }) }}">{{ stagiaire }}</a></td>
+            <td><a href="">Inscrire</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Programmes</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Module</th>
+            <th>Catégorie</th>
+            <th>Date début</th>
+            <th>Date fin</th>
+            <th>Déprogrammer</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for programme in session.programmes %}
+            
+        <tr>
+            <td>{{ programme.module.nomModule }}</td>
+            <td>{{ programme.module.categorie }}</td>
+            <td>{{ session.dateDebut|date('d-m-Y') }}</td>
+            <td>{{ session.dateFin|date('d-m-Y') }}</td>
+            <td><a href="">Déprogrammer</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

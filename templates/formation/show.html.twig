@@ -6,31 +6,7 @@
 
 <h1>Session en cours</h1>
 
-<table>
-    <thead>
-        <tr>
-            <th>Status</th>
-            <th>Formation</th>
-            <th>Session</th>
-            <th>Date de début</th>
-            <th>Date de fin</th>
-            <th>Inscrits</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for session in sessions %}
-        <tr>
-            <td class="status">Session incomplet</td>
-            <td>{{ session.formation }}</td>
-            <td><a class="session" href="{{ path('show_session', {'id': session.id}) }}">{{ session }}</a></td>
-            <td>{{ session.dateSession|date('d/m/Y') }}</td>
-            <td>{{ session.dateFin|date('d/m/Y') }}</td>
-            <td>{{ session.stagiaires|length }} / {{ session.nbPlace }}</td>
-            <td class="edit"><a href="">Edit</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+
+
 
 {% endblock %}
