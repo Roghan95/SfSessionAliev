@@ -6,6 +6,8 @@
 
 <h1>Fiche de formateur</h1>
 
+<a href="{{ path('edit_formateur', {'id' : formateur.id}) }}" >Editer</a> <br>
+
 <strong>{{ formateur }}</strong>
 <ul style="list-style: none;">
     <li>Sexe : {{ formateur.sexe }} </li>

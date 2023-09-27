@@ -4,4 +4,16 @@
 
 {% block body %}
 
+{{ form_start(formAddFormateur) }}
+
+{{ form_row(formAddFormateur.nomFormateur) }}
+{{ form_row(formAddFormateur.prenomFormateur) }}
+{{ form_row(formAddFormateur.sexe) }}
+{{ form_row(formAddFormateur.dateNaissance) }}
+{{ form_row(formAddFormateur.email) }}
+{{ form_row(formAddFormateur.telephone) }}
+{{ form_row(formAddFormateur.valider) }}
+
+{{ form_end(formAddFormateur) }}
+
 {% endblock %}
