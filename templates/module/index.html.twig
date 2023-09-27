@@ -21,7 +21,7 @@
             <td>{{ module.nomModule }}</td>
             <td>{{ module.categorie }}</td>
             <td>
-                <a style="text-decoration: none; color:rgb(255, 187, 0);" href="#">Editer</a> |
+                <a style="text-decoration: none; color:rgb(255, 187, 0);" href="{{ path('edit_module', {'id' : module.id}) }}">Editer</a> |
                 <a style="text-decoration: none; color:rgb(255, 187, 0);" href="#">Suppr</a>
             </td>
         </tr>
