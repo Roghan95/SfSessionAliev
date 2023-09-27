@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class StagiaireType extends AbstractType
 {
@@ -30,7 +31,7 @@ class StagiaireType extends AbstractType
                 ]
             ])
             ->add('dateNaissance', DateType::class, [
-                'widget' => 'signel_text',
+                'widget' => 'single_text',
                 'attr' => [
                     'class' => 'form_control'
                 ]
@@ -45,7 +46,7 @@ class StagiaireType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('valider', SumbitType::class, [
+            ->add('valider', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn-sumbit'
                 ]

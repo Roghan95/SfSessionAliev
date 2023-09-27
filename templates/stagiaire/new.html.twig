@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un employé{% endblock %}
+
+{% block body %}
+
+{{ form_start(formAddStagiaire) }}
+
+{{ form_row(formAddStagiaire.nomStagiaire) }}
+{{ form_row(formAddStagiaire.prenomStagiaire) }}
+{{ form_row(formAddStagiaire.sexe) }}
+{{ form_row(formAddStagiaire.dateNaissance) }}
+{{ form_row(formAddStagiaire.email) }}
+{{ form_row(formAddStagiaire.telephone) }}
+{{ form_row(formAddStagiaire.valider) }}
+
+{{ form_end(formAddStagiaire) }}
+
+{% endblock %}
