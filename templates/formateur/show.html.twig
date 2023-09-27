@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<h1>Fiche de formateur</h1>
+<h1>Fiche du formateur</h1>
 
 <a href="{{ path('edit_formateur', {'id' : formateur.id}) }}" >Editer</a> <br>
 
@@ -27,7 +27,6 @@
             <th>Date de début</th>
             <th>Date de fin</th>
             <th>Inscrits</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -39,7 +38,6 @@
             <td>{{ session.dateFin|date("d-m-Y") }}</td>
             {# Le nombre de places qui reste selon le nombre de stagiaires inscrits #}
             <td>{{ session.stagiaires|length }}/{{ session.nbPlaces }}</td>
-            <td><a href="">Edit</a> | <a href="">Suppr</a></td>
         </tr>
         {% endfor %}
     </tbody>
