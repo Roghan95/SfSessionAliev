@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un employé{% endblock %}
+
+{% block body %}
+
+{{ form_start(formAddSession) }}
+
+{{ form_row(formAddSession.nomSession) }}
+{{ form_row(formAddSession.nbPlaces) }}
+{{ form_row(formAddSession.dateDebut) }}
+{{ form_row(formAddSession.dateFin) }}
+{{ form_row(formAddSession.formation) }}
+{{ form_row(formAddSession.formateur) }}
+{{ form_row(formAddSession.valider) }}
+
+{{ form_end(formAddSession) }}
+
+{% endblock %}

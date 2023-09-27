@@ -22,10 +22,12 @@
             <td>{{ module.categorie }}</td>
             <td>
                 <a style="text-decoration: none; color:rgb(255, 187, 0);" href="{{ path('edit_module', {'id' : module.id}) }}">Editer</a> |
-                <a style="text-decoration: none; color:rgb(255, 187, 0);" href="#">Suppr</a>
+                <a style="text-decoration: none; color:rgb(255, 187, 0);" href="{{ path('delete_module', {'id' : module.id}) }}">Suppr</a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<a href="{{ path('new_module')}}">Ajouter un module</a>
 {% endblock %}
