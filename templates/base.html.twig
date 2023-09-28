@@ -13,10 +13,11 @@
 </head>
 
 <body>
+    <div .container>
     <nav style="display: flex; 
         justify-content:space-around; 
         height:70px; 
-        background-color:#002A3C; 
+        background-color:#007bff; 
         justify-content:center; 
         align-items:center; 
         margin-bottom: 30px;">
@@ -32,10 +33,10 @@
             <li><a style="color: white;" href="{{ path('app_stagiaire') }}">STAGIAIRES</a></li>
             <li><a style="color: white;" href="{{ path('app_formateur') }}">FORMATEURS</a></li>
             <li><a style="color: white;" href="{{ path('app_module') }}">MODULES</a></li>
-            <li><a style="color: white;" href="">CATEGORIES</a></li>
+            <li><a style="color: white;" href="{{ path('app_categorie') }}">CATEGORIES</a></li>
         </ul>
     </nav>
-
+</div>
     {% block body %}
 
     {% endblock %}

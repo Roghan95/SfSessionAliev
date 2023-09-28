@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Module;
 use App\Entity\Session;
 use App\Entity\Formateur;
+use App\Entity\Programme;
+use App\Entity\Stagiaire;
 use App\Form\SessionType;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\Entity;
 use App\Repository\SessionRepository;
-use App\Repository\FormateurRepository;
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,8 +77,62 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('app_session');
     }
 
+    #[Route('/session/{session}/{stagiaire}/delete', name: 'delete_stagiaire_session')]
+    public function deleteStagiaire(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityMananger) {
 
-    
+        $session->removeStagiaire($stagiaire);
+        $entityMananger->flush();
+        return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
+    }
+
+    #[Route('/session/{session}/{stagiaire}/add', name: 'add_stagiaire_session')]
+    public function addStagiaire(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityMananger) {
+
+        $session->addStagiaire($stagiaire);
+        $entityMananger->flush();
+
+        return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
+    }
+
+    // Méthode qui permet de déprogrammer un programme
+    #[Route('/programme/{programme}/delete', name: 'delete_programme_session')]
+    public function deleteProgramme(Programme $programme, EntityManagerInterface $entityMananger) {
+
+        $session = $programme->getSession();
+        $entityMananger->remove($programme);
+        $entityMananger->flush();
+
+        return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
+    }
+
+    #[Route('/programme/{session}/{module}/add', name: 'add_programme_session')]
+    public function addProgramme(Request $request, Session $session, Module $module, EntityManagerInterface $entityMananger) {
+        // On instancie l'entity Programme
+        $programme = new Programme();
+        
+        // On attribue module a programme
+        $programme->setModule($module);
+
+        // On attribue session a programme
+        $programme->setSession($session);
+
+        // On récupère ce que l'user a entrer dans le champs nbJours (method POST = request->request)
+        $nbJours = $request->request->get("nbJours");
+
+        // on attribue le nbJours a programme
+        $programme->setNbJours($nbJours);
+        
+        // On ajoute le programme dans la session
+        $session->addProgramme($programme);
+
+        // On prepare
+        $entityMananger->persist($programme);
+        // et on exécute
+        $entityMananger->flush();
+
+        // On return la vue show_session et lui donne l'id de la session actuel
+        return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
+    }
 
     #[Route('/session/{id}', name: 'show_session')]
     public function show(Session $session, SessionRepository $sessionRepository): Response
@@ -94,5 +152,4 @@ class SessionController extends AbstractController
             'sessionsNotIn' => $sessionsNotIn
         ]);
     }
-    
 }
