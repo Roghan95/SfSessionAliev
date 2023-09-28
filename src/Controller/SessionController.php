@@ -8,8 +8,6 @@ use App\Entity\Formateur;
 use App\Entity\Programme;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping\Entity;
 use App\Repository\SessionRepository;
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\EntityManagerInterface;
