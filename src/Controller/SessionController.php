@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
 {
-    #[Route('/session', name: 'app_session')]
+    #[Route('/session', name: 'app_session')] // URL
     public function index(SessionRepository $sessionRepository, ProgrammeRepository $programmeRepository): Response
     {
         // Récupère toutes les sessions dans l'ordre alphabétique des noms de session
@@ -34,8 +34,8 @@ class SessionController extends AbstractController
         ]);
     }
 
-    #[Route('/session/new', name: 'new_session')]
-    #[Route('/session/{id}/edit', name: 'edit_session')]
+    #[Route('/session/new', name: 'new_session')] // URL
+    #[Route('/session/{id}/edit', name: 'edit_session')] // URL
     public function new_edit(Session $session = null, Request $request = null, EntityManagerInterface $entityMananger) : Response {
         
         // Si il existe
@@ -57,38 +57,48 @@ class SessionController extends AbstractController
             $entityMananger->persist($session); // prepare PDO
             $entityMananger->flush(); // execute PDO
 
+            // Redirection vers la page session
             return $this->redirectToRoute('app_session');
         }
 
+        // Renvoie la vue 'session/new.html.twig' avec le form
         return $this->render('session/new.html.twig', [
             'formAddSession' => $form
         ]);
     }
 
     // Fonction permettant de supprimer un session
-    #[Route('/session/{id}/delete', name: 'delete_session')]
+    #[Route('/session/{id}/delete', name: 'delete_session')] // URL
     public function delete(Session $session, EntityManagerInterface $entityMananger) {
         
         $entityMananger->remove($session); // prepare PDO
         $entityMananger->flush(); // execute PDO
 
+        // Redirection vers la page session
         return $this->redirectToRoute('app_session');
     }
 
-    #[Route('/session/{session}/{stagiaire}/delete', name: 'delete_stagiaire_session')]
-    public function deleteStagiaire(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityMananger) {
 
-        $session->removeStagiaire($stagiaire);
-        $entityMananger->flush();
+    // Méthode qui permet de déprogrammer un formateur
+    #[Route('/session/{session}/{stagiaire}/delete', name: 'delete_stagiaire_session')] // URL
+    public function deleteStagiaire(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityMananger) {
+        
+        $session->removeStagiaire($stagiaire); // On supprime le formateur de la session
+        $entityMananger->flush(); // On execute la requête
+
+        // Redirection vers la page session
         return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
     }
 
-    #[Route('/session/{session}/{stagiaire}/add', name: 'add_stagiaire_session')]
+    // Méthode qui permet d'ajouter un formateur
+    #[Route('/session/{session}/{stagiaire}/add', name: 'add_stagiaire_session')] // URL
     public function addStagiaire(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityMananger) {
 
-        $session->addStagiaire($stagiaire);
-        $entityMananger->flush();
+        
+        $session->addStagiaire($stagiaire); // On ajoute le formateur dans la session
+        $entityMananger->flush(); // On execute la requête
 
+        // Redirection vers la page session
         return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
     }
 
@@ -96,18 +106,19 @@ class SessionController extends AbstractController
     #[Route('/programme/{programme}/delete', name: 'delete_programme_session')]
     public function deleteProgramme(Programme $programme, EntityManagerInterface $entityMananger) {
 
-        $session = $programme->getSession();
-        $entityMananger->remove($programme);
-        $entityMananger->flush();
+        $session = $programme->getSession(); // On récupère la session du programme
+        $entityMananger->remove($programme); // On supprime le programme
+        $entityMananger->flush(); // On execute la requête
 
+        // Redirection vers la page session
         return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
     }
 
-    #[Route('/programme/{session}/{module}/add', name: 'add_programme_session')]
+    #[Route('/programme/{session}/{module}/add', name: 'add_programme_session')] // URL
     public function addProgramme(Request $request, Session $session, Module $module, EntityManagerInterface $entityMananger) {
         // On instancie l'entity Programme
         $programme = new Programme();
-        
+
         // On attribue module a programme
         $programme->setModule($module);
 
@@ -132,7 +143,8 @@ class SessionController extends AbstractController
         return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
     }
 
-    #[Route('/session/{id}', name: 'show_session')]
+    // Méthode qui permet de déprogrammer un formateur
+    #[Route('/session/{id}', name: 'show_session')] // URL
     public function show(Session $session, SessionRepository $sessionRepository): Response
     {
         // Récupère la session spécifique en fonction de l'ID passé dans l'URL

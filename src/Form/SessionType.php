@@ -18,6 +18,7 @@ class SessionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // On ajoute les champs du formulaire
         $builder
             ->add('nomSession', TextType::class, [
                 'label' => 'Nom de la session * : ',

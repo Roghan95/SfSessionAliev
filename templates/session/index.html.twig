@@ -27,8 +27,10 @@
             <td>{{ session.dateDebut|date("d/m/Y") }}</td>
             <td>{{ session.dateFin|date("d/m/Y") }}</td>
             <td>{{ session.stagiaires|length }}/{{ session.nbPlaces }}</td>
-            <td><a style="text-decoration: none; color:rgb(255, 187, 0);" href="{{ path('edit_session', {'id' : session.id}) }}">Editer</a> / <a
-                    style="text-decoration: none; color:rgb(255, 187, 0);" href="{{ path('delete_session', {'id' : session.id}) }}">Suppr</a></td>
+            <td><a style="text-decoration: none; color:rgb(255, 187, 0);"
+                    href="{{ path('edit_session', {'id' : session.id}) }}">Editer</a> / <a
+                    style="text-decoration: none; color:rgb(255, 187, 0);"
+                    href="{{ path('delete_session', {'id' : session.id}) }}">Suppr</a></td>
         </tr>
         {% endfor %}
     </tbody>

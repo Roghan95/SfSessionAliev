@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
-{% block description %}{% endblock %}
+{% block description %}Formulaire d'ajout/edit Session{% endblock %}
 
 {% block title %}Ajouter un employé{% endblock %}
 
 {% block body %}
 
+
+{# Formulaire d'ajout/edit session #}
 {{ form_start(formAddSession) }}
 
 {{ form_row(formAddSession.nomSession) }}

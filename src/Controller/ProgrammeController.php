@@ -8,11 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProgrammeController extends AbstractController
 {
-    #[Route('/programme', name: 'app_programme')]
-    public function index(): Response
-    {
-        return $this->render('programme/index.html.twig', [
-            'controller_name' => 'ProgrammeController',
-        ]);
-    }
+    // Fonction permettant d'afficher tous les programmes
+    // #[Route('/programme', name: 'app_programme')]
+    // public function index(): Response
+    // {
+    //     return $this->render('programme/index.html.twig', [
+    //         'controller_name' => 'ProgrammeController',
+    //     ]);
+    // }
 }

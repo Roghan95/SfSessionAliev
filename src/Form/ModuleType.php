@@ -15,6 +15,7 @@ class ModuleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // On ajoute les champs du formulaire
         $builder
             ->add('nomModule', TextType::class, [
                 'attr' => [

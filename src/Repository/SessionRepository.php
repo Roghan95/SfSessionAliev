@@ -45,26 +45,37 @@ class SessionRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
     // Afficher les stagiaires non inscrits dans une session
     public function findStagiaireNotIn($session_id) {
+
+        // récupérer l'entity manager
         $em = $this->getEntityManager();
+
+        // créer une sous-requête
         $sub = $em->createQueryBuilder();
 
         $qb = $sub;
         // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
-        $qb->select('s')
-            ->from('App\Entity\Stagiaire', 's')
-            ->leftJoin('s.sessions', 'se')
-            ->where('se.id = :id');
+        $qb->select('s') // SELECT stagiaire
+            ->from('App\Entity\Stagiaire', 's') // FROM stagiaire
+            ->leftJoin('s.sessions', 'se') // LEFT JOIN stagiaire_session
+            ->where('se.id = :id'); // WHERE stagiaire_session.session_id = :id
 
-        $sub = $em->createQueryBuilder();
+        $sub = $em->createQueryBuilder(); // créer une sous-requête
+
         // sélectionner tous les stagiaires qui ne SONT PAS (NOT IN) dans le résultat précédent
         // on obtient donc les stagiaires non inscrits pour une session définie
-        $sub->select('st')
-            ->from('App\Entity\Stagiaire', 'st')
-            ->where($sub->expr()->notIn('st.id', $qb->getDQL()))
+        $sub->select('st') // SELECT stagiaire
+
+            ->from('App\Entity\Stagiaire', 'st') // FROM stagiaire
+
+            ->where($sub->expr()->notIn('st.id', $qb->getDQL())) // WHERE stagiaire.id NOT IN (sous-requête)
+
             // requête paramétrée
-            ->setParameter('id', $session_id)
+            ->setParameter('id', $session_id) // paramètre :id = $session_id
+
             // trier la liste des stagiaires sur le nom de famille
             ->orderBy('st.nomStagiaire');
 
@@ -73,53 +84,39 @@ class SessionRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    // Afficher les modules non programmée
-    // public function findModuleNotIn($module_id) {
-    //     $em = $this->getEntityManager();
-    //     $sub = $em->createQueryBuilder();
 
-    //     $qb = $sub;
-
-    //     $qb->select('m')
-    //         ->from('App\Entity\Module', 'p')
-    //         ->leftJoin('p.programmes', 'pr')
-    //         ->leftJoin('m.module', 'mo')
-    //         ->where('pr.id = :id');
-        
-    //     $sub = $em->createQueryBuilder();
-    //     // sélectionner tous les stagiaires qui ne SONT PAS (NOT IN) dans le résultat précédent
-    //     // on obtient donc les modules non programmée
-    //     $sub->select('mo')
-    //         ->from('App\Entity\Module', 'mo')
-    //         ->where($sub->expr()->notIn('mo.id', $qb->getDQL()))
-    //         // requête paramétrée
-    //         ->setParameter('id', $module_id)
-    //         // trier la liste des modules par catégorie
-    //         ->orderBy('mo.categorie'); 
-
-    //         // renvoyer le résultat
-    //         $query = $sub->getQuery();
-    //         return $query->getResult();
-    // }
-
+    // Afficher les modules non programmer dans une session
     public function findNonProgrammer($session_id)
     {
+        // Récupérer l'entity manager
         $entityManager = $this->getEntityManager();
 
+        // Créer une sous-requête
         $subQuery = $entityManager->createQueryBuilder();
-        $subQuery->select('IDENTITY(programme.module)')
-            ->from('App\Entity\Programme', 'programme')
-            ->where('programme.session = :session_id');
+        // Sélectionner tous les formateurs qui sont dans une session dont l'id est passé en paramètre
+        $subQuery->select('IDENTITY(programme.module)') // SELECT programme.module
+            ->from('App\Entity\Programme', 'programme') // FROM programme
+            ->where('programme.session = :session_id'); // WHERE programme.session = :session_id
 
-        $qb = $entityManager->createQueryBuilder();
-        $qb->select('module')
-            ->from('App\Entity\Module', 'module')
+        
+        $qb = $entityManager->createQueryBuilder(); // Créer une requête
+        // Sélectionner tous les formateurs qui ne sont pas dans le résultat de la sous-requête
+        $qb->select('module') // SELECT module
+            ->from('App\Entity\Module', 'module') // FROM module
+
+             // WHERE module.id NOT IN (sous-requête)
             ->where($qb->expr()->notIn('module.id', $subQuery->getDQL()))
+
+            // requête paramétrée
             ->setParameter('session_id', $session_id)
+
+            // trier la liste des formateurs sur le nom de famille
             ->orderBy('module.nomModule');
+
         // Exécuter la requête
         $result = $qb->getQuery()->getResult();
 
+        // Renvoyer le résultat
         return $result;
     }
 }

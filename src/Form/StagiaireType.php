@@ -14,6 +14,7 @@ class StagiaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // On ajoute les champs du formulaire
         $builder
             ->add('nomStagiaire', TextType::class, [
                 'attr' => [

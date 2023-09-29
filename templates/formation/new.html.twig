@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block description %}{% endblock %}
+
+{% block title %}Ajouter un employé{% endblock %}
+
+{% block body %}
+
+{# Formulaire d'ajout/edition formation #}
+{{ form_start(form) }}
+
+{{ form_row(form.nomFormation) }}
+{{ form_row(form.valider) }}
+
+{{ form_end(form) }}
+
+{% endblock %}

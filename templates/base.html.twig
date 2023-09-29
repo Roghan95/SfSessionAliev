@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="{% block description %}Bienvenue sur l'outil de gestion de session de formation{% endblock %}">
-
-    <title>{% block title %}Welcome{% endblock %}</title>
+    <meta name="description"
+        content="{% block description %}Bienvenue sur l'outil de gestion de session de formation{% endblock %}">
+    <title>{% block title %}Bienvenue{% endblock %}</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     {% block stylesheets %}
@@ -16,29 +16,29 @@
 
 <body>
     <div .container>
-    <nav style="display: flex; 
+        <nav style="display: flex; 
         justify-content:space-around; 
         height:70px; 
         background-color:#007bff; 
         justify-content:center; 
         align-items:center; 
         margin-bottom: 30px;">
-        {# -------------------------------------------------------------------------------------- #}
-        <ul style="
+            {# -------------------------------------------------------------------------------------- #}
+            <ul style="
         list-style: none; 
         display:flex; 
         gap:20px; 
         color:white;">
-            <li><a style="color: white;" href="{{ path('app_home') }}">ACCUEIL</a></li>
-            <li><a style="color: white;" href="{{ path('app_formation') }}">FORMATIONS</a></li>
-            <li><a style="color: white;" href="{{ path('app_session') }}">SESSIONS</a></li>
-            <li><a style="color: white;" href="{{ path('app_stagiaire') }}">STAGIAIRES</a></li>
-            <li><a style="color: white;" href="{{ path('app_formateur') }}">FORMATEURS</a></li>
-            <li><a style="color: white;" href="{{ path('app_module') }}">MODULES</a></li>
-            <li><a style="color: white;" href="{{ path('app_categorie') }}">CATEGORIES</a></li>
-        </ul>
-    </nav>
-</div>
+                <li><a style="color: white;" href="{{ path('app_home') }}">ACCUEIL</a></li>
+                <li><a style="color: white;" href="{{ path('app_formation') }}">FORMATIONS</a></li>
+                <li><a style="color: white;" href="{{ path('app_session') }}">SESSIONS</a></li>
+                <li><a style="color: white;" href="{{ path('app_stagiaire') }}">STAGIAIRES</a></li>
+                <li><a style="color: white;" href="{{ path('app_formateur') }}">FORMATEURS</a></li>
+                <li><a style="color: white;" href="{{ path('app_module') }}">MODULES</a></li>
+                <li><a style="color: white;" href="{{ path('app_categorie') }}">CATEGORIES</a></li>
+            </ul>
+        </nav>
+    </div>
     {% block body %}
 
     {% endblock %}
