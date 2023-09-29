@@ -34,7 +34,8 @@
         {% for stagiaire in session.stagiaires %}
         <tr>
             <td><a href="{{ path('show_stagiaire', {'id' : stagiaire.id }) }}">{{ stagiaire }}</a></td>
-            <td><a class="button"
+            <td>
+                <a class="button"
                     href="{{ path('delete_stagiaire_session', {'session': session.id, 'stagiaire':stagiaire.id}) }}">Désinscrire</a>
             </td>
         </tr>
@@ -82,7 +83,8 @@
             <td>{{ programme.module.categorie }}</td>
             <td>{{ programme.nbJours }} jours</td>
             <td><a class="button"
-                    href="{{ path('delete_programme_session', {'programme': programme.id}) }}">Déprogrammer</a></td>
+                    href="{{ path('delete_programme_session', {'programme': programme.id}) }}">Déprogrammer</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

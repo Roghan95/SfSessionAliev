@@ -5,10 +5,14 @@
 {% block body %}
 <h1>Liste des formateurs</h1>
 {% for formateur in formateurs %}
-<a href="{{ path('show_formateur', {'id' : formateur.id }) }}">{{ formateur }}</a>
-<a href="{{ path('delete_formateur', {'id' : formateur.id}) }}">Supprimer</a>
-<br>
-{% endfor %}
+<div style="padding: 10px;">
+    <a href="{{ path('show_formateur', {'id' : formateur.id }) }}">{{ formateur }}</a>
 
-<a href="{{ path('new_formateur') }}" >Ajouter un formateur</a>
+    <a style="color: brown;" href="{{ path('delete_formateur', {'id' : formateur.id}) }}">Supprimer</a>
+    <br>
+</div>
+{% endfor %}
+<div style="margin: 10px; border:1px solid #007bff; width:fit-content; border-radius:5px; padding:10px;">
+    <a href="{{ path('new_formateur') }}">Ajouter un formateur</a>
+</div>
 {% endblock %}

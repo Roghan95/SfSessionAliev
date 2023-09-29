@@ -16,6 +16,23 @@ body {
     padding: 0;
 }
 
+nav {
+    display: flex;
+    justify-content: space-around;
+    height: 70px;
+    background-color: #007bff;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    color: white;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
