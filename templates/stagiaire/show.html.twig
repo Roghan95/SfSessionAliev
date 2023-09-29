@@ -17,10 +17,6 @@
 </ul>
 
 <h2>Sessions</h2>
-{# <ul>
-    <li>{{ session }} ({{ session.formateur }})</li>
-</ul> #}
-
 <table border="1">
     <thead>
         <tr>
@@ -48,7 +44,9 @@
             <td>{{ session.dateDebut|date("d-m-Y") }}</td>
             <td>{{ session.dateFin|date("d-m-Y") }}</td>
             <td>{{ session.stagiaires|length }}/{{ session.nbPlaces }}</td>
-            <td><a href="">Désinscrire</a></td>
+            <td><a class="button"
+                    href="{{ path('delete_stagiaire_session', {'session': session.id, 'stagiaire':stagiaire.id}) }}">Désinscrire</a>
+            </td>
 
         </tr>
         {% endfor %}

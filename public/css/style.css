@@ -14,10 +14,6 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .container {
@@ -46,7 +42,8 @@ a:hover {
 }
 
 /* Styles pour les listes et les tableaux */
-ul, ol {
+ul,
+ol {
     list-style: none;
 }
 
@@ -56,11 +53,14 @@ table {
     margin-bottom: 20px;
 }
 
-table, th, td {
+table,
+th,
+td {
     border: 1px solid #ccc;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: left;
 }
@@ -120,7 +120,8 @@ thead {
 }
 
 /* Styles pour les boutons "Désinscrire" et "Inscrire" */
-.deregister-button, .register-button {
+.deregister-button,
+.register-button {
     background-color: #dc3545;
     color: #fff;
     padding: 5px 10px;
@@ -150,7 +151,8 @@ select {
 
 /* Styles pour les champs de date (input type=date) */
 input[type="date"] {
-    width: 50%; /* Vous pouvez ajuster la largeur selon vos besoins */
+    width: 50%;
+    /* Vous pouvez ajuster la largeur selon vos besoins */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;

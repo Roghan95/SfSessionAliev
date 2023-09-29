@@ -90,11 +90,10 @@ class SessionController extends AbstractController
         return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
     }
 
-    // Méthode qui permet d'ajouter un formateur
+    // Méthode qui permet d'ajouter un stagiaire
     #[Route('/session/{session}/{stagiaire}/add', name: 'add_stagiaire_session')] // URL
     public function addStagiaire(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityMananger) {
 
-        
         $session->addStagiaire($stagiaire); // On ajoute le formateur dans la session
         $entityMananger->flush(); // On execute la requête
 
@@ -114,26 +113,21 @@ class SessionController extends AbstractController
         return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
     }
 
+    // Méthode qui permet de programmer un programme
     #[Route('/programme/{session}/{module}/add', name: 'add_programme_session')] // URL
     public function addProgramme(Request $request, Session $session, Module $module, EntityManagerInterface $entityMananger) {
         // On instancie l'entity Programme
         $programme = new Programme();
-
         // On attribue module a programme
         $programme->setModule($module);
-
         // On attribue session a programme
         $programme->setSession($session);
-
-        // On récupère ce que l'user a entrer dans le champs nbJours (method POST = request->request)
+        // On récupère ce que l'user a entrer dans le champs nbJours (method POST request->request)
         $nbJours = $request->request->get("nbJours");
-
         // on attribue le nbJours a programme
         $programme->setNbJours($nbJours);
-        
         // On ajoute le programme dans la session
         $session->addProgramme($programme);
-
         // On prepare
         $entityMananger->persist($programme);
         // et on exécute
@@ -143,7 +137,7 @@ class SessionController extends AbstractController
         return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
     }
 
-    // Méthode qui permet de déprogrammer un formateur
+    // Méthode qui permet de déprogrammer une session
     #[Route('/session/{id}', name: 'show_session')] // URL
     public function show(Session $session, SessionRepository $sessionRepository): Response
     {

@@ -9,7 +9,11 @@
 
 <h2>Plateau numérique</h2>
 <ul>
-    <li>Formateur référent : <a href="{{ path('show_formateur', {'id' : session.formateur.id }) }}">{{ session.formateur }}</a></li><br>
+    <li>
+        Formateur référent : <a href="{{ path('show_formateur', {'id' : session.formateur.id }) }}">{{
+            session.formateur}}</a>
+    </li>
+    <br>
     <li>Date de début : {{ session.dateDebut|date('d-m-Y') }}</li>
     <li>Date de fin : {{ session.dateFin|date('d-m-Y') }}</li>
     <li>Nombre de place : {{ session.nbPlaces }}</li>
@@ -19,42 +23,49 @@
 
 <h2>Stagiaires inscrits</h2>
 
-<table border="1" >
+<table border="1">
     <thead>
         <tr>
             <th>Stagiaire</th>
-            <th>Désinscrire</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         {% for stagiaire in session.stagiaires %}
         <tr>
             <td><a href="{{ path('show_stagiaire', {'id' : stagiaire.id }) }}">{{ stagiaire }}</a></td>
-            <td><a href="{{ path('delete_stagiaire_session', {'session': session.id, 'stagiaire':stagiaire.id}) }}">Désinscrire</a></td>
+            <td><a class="button"
+                    href="{{ path('delete_stagiaire_session', {'session': session.id, 'stagiaire':stagiaire.id}) }}">Désinscrire</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+{# // ajouter un bouton pour inscrire un stagiaire #}
 <h2>Stagiaires non inscrits</h2>
 
 <table border="1">
     <thead>
         <tr>
             <th>Stagiaire</th>
-            <th>Inscrire</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         {% for stagiaire in stagiairesNotIn %}
         <tr>
             <td><a href="{{ path('show_stagiaire', {'id' : stagiaire.id }) }}">{{ stagiaire }}</a></td>
-            <td><a href="{{ path('add_stagiaire_session', {'session': session.id, 'stagiaire': stagiaire.id}) }}">Inscrire</a></td>
+            <td><a class="button"
+                    href="{{ path('add_stagiaire_session', {'session': session.id, 'stagiaire': stagiaire.id}) }}">Inscrire</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
 <h2>Modules programmés</h2>
+
 <table border="1">
     <thead>
         <tr>
@@ -70,13 +81,15 @@
             <td>{{ programme.module.nomModule }}</td>
             <td>{{ programme.module.categorie }}</td>
             <td>{{ programme.nbJours }} jours</td>
-            <td><a href="{{ path('delete_programme_session', {'programme': programme.id}) }}">Déprogrammer</a></td>
+            <td><a class="button"
+                    href="{{ path('delete_programme_session', {'programme': programme.id}) }}">Déprogrammer</a></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
 <h2>Modules non programmés</h2>
+
 <table border="1">
     <thead>
         <tr>
@@ -91,9 +104,10 @@
             <td>{{ module }}</td>
             <td>{{ module.categorie }}</td>
             <td>
-                <form action="{{ path('add_programme_session', {'session':session.id, 'module':module.id}) }}" method="post">
+                <form action="{{ path('add_programme_session', {'session':session.id, 'module':module.id}) }}"
+                    method="post">
                     <input type="number" name="nbJours" id="nbJours">
-                    <input type="submit" value="Programmer">
+                    <input class="button" type="submit" value="Programmer">
                 </form>
             </td>
         </tr>
