@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un employé{% endblock %}
+
+{% block body %}
+
+{# Formulaire d'ajout/edit module #}
+{{ form_start(formAddCategorie) }}
+
+{{ form_row(formAddCategorie.nomCategorie) }}
+{{ form_row(formAddCategorie.valider) }}
+
+{{ form_end(formAddCategorie) }}
+
+{% endblock %}
