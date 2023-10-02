@@ -27,17 +27,21 @@
     <thead>
         <tr>
             <th>Stagiaire</th>
+            {% if app.user %}
             <th>Action</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
         {% for stagiaire in session.stagiaires %}
         <tr>
             <td><a href="{{ path('show_stagiaire', {'id' : stagiaire.id }) }}">{{ stagiaire }}</a></td>
+            {% if app.user %}  
             <td>
                 <a class="button"
-                    href="{{ path('delete_stagiaire_session', {'session': session.id, 'stagiaire':stagiaire.id}) }}">Désinscrire</a>
+                href="{{ path('delete_stagiaire_session', {'session': session.id, 'stagiaire':stagiaire.id}) }}">Désinscrire</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>
@@ -50,16 +54,20 @@
     <thead>
         <tr>
             <th>Stagiaire</th>
+            {% if app.user %}
             <th>Action</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
         {% for stagiaire in stagiairesNotIn %}
         <tr>
             <td><a href="{{ path('show_stagiaire', {'id' : stagiaire.id }) }}">{{ stagiaire }}</a></td>
+            {% if app.user %}            
             <td><a class="button"
                     href="{{ path('add_stagiaire_session', {'session': session.id, 'stagiaire': stagiaire.id}) }}">Inscrire</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>
@@ -73,7 +81,9 @@
             <th>Module</th>
             <th>Catégorie</th>
             <th>Durée</th>
+            {% if app.user %}
             <th>Action</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -82,9 +92,12 @@
             <td>{{ programme.module.nomModule }}</td>
             <td>{{ programme.module.categorie }}</td>
             <td>{{ programme.nbJours }} jours</td>
-            <td><a class="button"
+            {% if app.user %}
+            <td>
+                <a class="button"
                     href="{{ path('delete_programme_session', {'programme': programme.id}) }}">Déprogrammer</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>
@@ -97,7 +110,9 @@
         <tr>
             <th>Module</th>
             <th>Catégorie</th>
+            {% if app.user %}
             <th>Durée</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -105,12 +120,14 @@
         <tr>
             <td>{{ module }}</td>
             <td>{{ module.categorie }}</td>
+            {% if app.user %}
             <td>
                 <form action="{{ path('add_programme_session', {'session':session.id, 'module':module.id}) }}"
-                    method="post">
-                    <input type="number" name="nbJours" id="nbJours">
-                    <input class="button" type="submit" value="Programmer">
+                method="post">
+                <input type="number" name="nbJours" id="nbJours">
+                <input class="button" type="submit" value="Programmer">
                 </form>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}

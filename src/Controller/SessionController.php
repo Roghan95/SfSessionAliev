@@ -21,6 +21,7 @@ class SessionController extends AbstractController
     #[Route('/session', name: 'app_session')] // URL
     public function index(SessionRepository $sessionRepository, ProgrammeRepository $programmeRepository): Response
     {
+        if ($this->getUser()) {
         // Récupère toutes les sessions dans l'ordre alphabétique des noms de session
         $sessions = $sessionRepository->findBy([], ['nomSession' => 'ASC']);
     
@@ -33,77 +34,83 @@ class SessionController extends AbstractController
             'programmes' => $programmes
         ]);
     }
+    return $this->redirectToRoute('app_login');
+    }
 
     #[Route('/session/new', name: 'new_session')] // URL
     #[Route('/session/{id}/edit', name: 'edit_session')] // URL
     public function new_edit(Session $session = null, Request $request = null, EntityManagerInterface $entityMananger) : Response {
-        
-        // Si il existe
-        if(!$session) {
-            // On instancie le manager
+        if($this->getUser()) {
+            // Si il existe
+            if(!$session) {
+                // On instancie le manager
             $session = new Session();
         }
-
+        
         // On récupère le form de l'entity sessionType
         $form = $this->createForm(SessionType::class, $session);
-
         // on vérifie l'intégrité des données qu'on a reçu par rapport aux données attendus 
         $form->handleRequest($request);
-
         // Si il est soumis et valide
         if($form->isSubmitted() && $form->isValid()) {
             $session = $form->getData(); // on récupère le saisi du form
-
             $entityMananger->persist($session); // prepare PDO
             $entityMananger->flush(); // execute PDO
-
             // Redirection vers la page session
             return $this->redirectToRoute('app_session');
         }
-
         // Renvoie la vue 'session/new.html.twig' avec le form
         return $this->render('session/new.html.twig', [
             'formAddSession' => $form
         ]);
-    }
+    } 
+    return $this->redirectToRoute('app_login');
+}
 
     // Fonction permettant de supprimer un session
     #[Route('/session/{id}/delete', name: 'delete_session')] // URL
     public function delete(Session $session, EntityManagerInterface $entityMananger) {
+        if($this->getUser()) {
         
         $entityMananger->remove($session); // prepare PDO
         $entityMananger->flush(); // execute PDO
 
         // Redirection vers la page session
         return $this->redirectToRoute('app_session');
+        }
+        return $this->redirectToRoute('app_login');
     }
 
 
     // Méthode qui permet de déprogrammer un formateur
     #[Route('/session/{session}/{stagiaire}/delete', name: 'delete_stagiaire_session')] // URL
     public function deleteStagiaire(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityMananger) {
-        
+        if($this->getUser()) {
         $session->removeStagiaire($stagiaire); // On supprime le formateur de la session
         $entityMananger->flush(); // On execute la requête
-
         // Redirection vers la page session
         return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
+        }
+        return $this->redirectToRoute('app_login');
     }
 
     // Méthode qui permet d'ajouter un stagiaire
     #[Route('/session/{session}/{stagiaire}/add', name: 'add_stagiaire_session')] // URL
     public function addStagiaire(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityMananger) {
-
+    if($this->getUser()) {
         $session->addStagiaire($stagiaire); // On ajoute le formateur dans la session
         $entityMananger->flush(); // On execute la requête
 
         // Redirection vers la page session
         return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
     }
+    return $this->redirectToRoute('app_login');
+    }
 
     // Méthode qui permet de déprogrammer un programme
     #[Route('/programme/{programme}/delete', name: 'delete_programme_session')]
     public function deleteProgramme(Programme $programme, EntityManagerInterface $entityMananger) {
+        if($this->getUser()) {
 
         $session = $programme->getSession(); // On récupère la session du programme
         $entityMananger->remove($programme); // On supprime le programme
@@ -111,11 +118,14 @@ class SessionController extends AbstractController
 
         // Redirection vers la page session
         return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
+        }
+        return $this->redirectToRoute('app_login');
     }
 
     // Méthode qui permet de programmer un programme
     #[Route('/programme/{session}/{module}/add', name: 'add_programme_session')] // URL
     public function addProgramme(Request $request, Session $session, Module $module, EntityManagerInterface $entityMananger) {
+        if($this->getUser()) {
         // On instancie l'entity Programme
         $programme = new Programme();
         // On attribue module a programme
@@ -132,21 +142,23 @@ class SessionController extends AbstractController
         $entityMananger->persist($programme);
         // et on exécute
         $entityMananger->flush();
-
         // On return la vue show_session et lui donne l'id de la session actuel
         return $this->redirectToRoute("show_session", ["id" => $session->getId()]);
+        }
+        return $this->redirectToRoute('app_login');
     }
 
     // Méthode qui permet de déprogrammer une session
     #[Route('/session/{id}', name: 'show_session')] // URL
     public function show(Session $session, SessionRepository $sessionRepository): Response
     {
-        // Récupère la session spécifique en fonction de l'ID passé dans l'URL
-        // Récupère les stagiaires qui ne sont pas inscrits à cette session
-        $stagiairesNotIn = $sessionRepository->findStagiaireNotIn($session->getId());
-    
-        // Récupère les sessions qui ne sont pas programmés pour cette session
-        $sessionsNotIn = $sessionRepository->findNonProgrammer($session->getId());
+        if($this->getUser()) {
+            // Récupère la session spécifique en fonction de l'ID passé dans l'URL
+            // Récupère les stagiaires qui ne sont pas inscrits à cette session
+            $stagiairesNotIn = $sessionRepository->findStagiaireNotIn($session->getId());
+            
+            // Récupère les sessions qui ne sont pas programmés pour cette session
+            $sessionsNotIn = $sessionRepository->findNonProgrammer($session->getId());
     
         // Renvoie la vue 'session/show.html.twig' avec les détails de la session, les stagiaires non inscrits
         // et les sessions non programmés
@@ -155,5 +167,7 @@ class SessionController extends AbstractController
             'stagiairesNotIn' => $stagiairesNotIn,
             'sessionsNotIn' => $sessionsNotIn
         ]);
+    }
+    return $this->redirectToRoute('app_login');
     }
 }

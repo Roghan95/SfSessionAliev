@@ -15,25 +15,26 @@
 </head>
 
 <body>
+    {% if app.user %}
     <div .container>
         <nav>
             <ul>
-                {# <li><a style="color: white;" href="{{ path('app_home') }}">ACCUEIL</a></li> #}
+                <li><a style="color: white;" href="{{ path('app_home') }}">ACCUEIL</a></li>
                 <li><a style="color: white;" href="{{ path('app_formation') }}">FORMATIONS</a></li>
                 <li><a style="color: white;" href="{{ path('app_session') }}">SESSIONS</a></li>
                 <li><a style="color: white;" href="{{ path('app_stagiaire') }}">STAGIAIRES</a></li>
                 <li><a style="color: white;" href="{{ path('app_formateur') }}">FORMATEURS</a></li>
                 <li><a style="color: white;" href="{{ path('app_module') }}">MODULES</a></li>
                 {# <li><a style="color: white;" href="{{ path('app_categorie') }}">CATEGORIES</a></li> #}
-                {# <li><a href="">LOGIN</a></li>
-                <li><a href="">ADMIN</a></li> #}
+                <li><a style="color: white;" href="">ADMIN</a></li>
+                <li><a style="color: white;" href="{{ path('app_logout') }}">LOGOUT</a></li>
             </ul>
         </nav>
     </div>
+    {% endif %}
     {% block body %}
 
     {% endblock %}
-
 
     {% block javascripts %}
     <script src=""></script>

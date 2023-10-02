@@ -9,11 +9,13 @@
 {% for stagiaire in stagiaires %}
 <div style="padding: 10px;">
     <a href="{{ path('show_stagiaire', {'id' : stagiaire.id }) }}">{{ stagiaire }}</a>
+    {% if app.user %}
     <a style="color: brown;" href="{{ path('delete_stagiaire', {'id' : stagiaire.id}) }}">Supprimer</a>
+    {% endif %}
     <br>
 </div>
 {% endfor %}
-<div style="margin: 10px; border:1px solid #007bff; width:fit-content; border-radius:5px; padding:10px;">
+{% if app.user %}
     <a href=" {{path('new_stagiaire') }}">Ajouter un stagiaire</a>
-</div>
+{% endif %}
 {% endblock %}

@@ -17,6 +17,7 @@ class FormationController extends AbstractController
     #[Route('/formation', name: 'app_formation')] // URL
     public function index(FormationRepository $formationRepository): Response
     {
+        if($this->getUser()) {
         // Récupère toutes les formations dans l'ordre alphabétique des noms de formation
         $formations = $formationRepository->findBy([], ['nomFormation' => 'ASC']);
 
@@ -25,12 +26,15 @@ class FormationController extends AbstractController
             'formations' => $formations
         ]);
     }
+    return $this->redirectToRoute('app_login');
+    }
 
     // Fonction permettant d'ajouter une formation et l'éditer
     #[Route('/formation/add', name: 'add_formation')] // URL
     #[Route('/formation/{id}/edit', name: 'edit_formation')] // URL
     public function addEditFormation(Formation $formation = null, EntityManagerInterface $entityManager, Request $request): Response
     {
+        if($this->getUser()) {
         // Si il existe
         if (!$formation) {
             $formation = new Formation();
@@ -53,12 +57,15 @@ class FormationController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    return $this->redirectToRoute('app_login');
+    }
 
 
     // Fonction permettant de supprimer une formation
     #[Route('/formation/{id}/delete', name: 'delete_formation')]
     public function deleteFormation(Formation $formation, EntityManagerInterface $entityManager): Response
     {
+        if($this->getUser()) {
         // On supprime la formation
         $entityManager->remove($formation);
         // On execute la requête
@@ -66,15 +73,20 @@ class FormationController extends AbstractController
 
         // Redirection vers la page formation
         return $this->redirectToRoute('app_formation');
+        }
+        return $this->redirectToRoute('app_login');
     }
 
     // Fonction permettant d'afficher les détails d'une formation
     #[Route('/formation/{id}', name: 'show_formation')]
     public function showSession(Formation $formation, FormationRepository $formationRepository, EntityManagerInterface $entityManager) : Response {
+        if($this->getUser()) {
 
         // Récupère toutes les formations dans l'ordre alphabétique des noms de formation
         return $this->render('formation/show.html.twig', [
             'formation' => $formation
         ]);
+    }
+    return $this->redirectToRoute('app_login');
     }
 }

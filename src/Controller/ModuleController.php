@@ -17,6 +17,7 @@ class ModuleController extends AbstractController
     #[Route('/module', name: 'app_module')] // URL
     public function index(ModuleRepository $moduleRepository): Response
     {
+        if($this->getUser()) {
         // Récupère tous les modules dans l'ordre alphabétique des noms de module
         $modules = $moduleRepository->findBy([], ['nomModule' => 'ASC']);
 
@@ -25,12 +26,14 @@ class ModuleController extends AbstractController
             'modules' => $modules
         ]);
     }
+        return $this->redirectToRoute('app_login');
+    }
 
     // Fonction permettant d'ajouter un module et l'éditer
     #[Route('/module/new', name: 'new_module')] // URL
     #[Route('/module/{id}/edit', name: 'edit_module')] // URL
     public function new_edit(Module $module = null, Request $request = null, EntityManagerInterface $entityMananger) : Response {
-        
+        if($this->getUser()) {
         // Si il existe
         if(!$module) {
             // On instancie le manager
@@ -59,25 +62,33 @@ class ModuleController extends AbstractController
             'formAddModule' => $form
         ]);
     }
+    return $this->redirectToRoute('app_login');
+    }
 
     // Fonction permettant de supprimer un module
     #[Route('/module/{id}/delete', name: 'delete_module')]
     public function delete(Module $module, EntityManagerInterface $entityMananger) {
+        if($this->getUser()) {
         
         $entityMananger->remove($module); // prepare PDO
         $entityMananger->flush(); // execute PDO
 
         // Redirection vers la page module
         return $this->redirectToRoute('app_module');
+        }
+        return $this->redirectToRoute('app_login');
     }
 
     // Fonction permettant d'afficher un module
     #[Route('/module/{id}', name: 'show_module')] // URL
     public function show(Module $module) : Response {
+        if($this->getUser()) {
 
         // Renvoie la vue 'module/show.html.twig' avec le module
         return $this->render('session/show.html.twig', [
             'module' => $module
         ]);
+    }
+    return $this->redirectToRoute('app_login');
     }
 }
