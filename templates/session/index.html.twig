@@ -38,8 +38,8 @@
             <td>{{ session.stagiaires|length }}/{{ session.nbPlaces }}</td>
             {% if app.user %}
             <td>
-                <a style="color:#007bff;" href="{{ path('edit_session', {'id' : session.id}) }}">Editer</a> |
-                <a style="color:#007bff;" href="{{ path('delete_session', {'id' : session.id}) }}">Suppr</a>
+                <a href="{{ path('edit_session', {'id' : session.id}) }}">Editer</a> |
+                <a href="{{ path('delete_session', {'id' : session.id}) }}">Suppr</a>
             </td>
             {% endif %}
         </tr>

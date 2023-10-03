@@ -1,184 +1,107 @@
-/* * {
-    margin: 0;
+* {
+    font-family: 'Roboto', sans-serif;    
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
+    text-decoration: none;
     list-style: none;
-    text-decoration: none;
-    font-family: sans-serif;
-    text-decoration: none;
-} */
-
-/* Styles pour la mise en page générale */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
 }
 
-nav {
+:root {
+    --textA : white;
+    --navHover: #458FFF;
+    --links: black;
+}
+/* NAV BAR --------------------------- */
+
+.nav-1 {
     display: flex;
-    justify-content: space-around;
-    height: 70px;
-    background-color: #007bff;
+    width: auto;
+    height: 80px;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.096);
+}
+
+.nav-align {
+    display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
+    gap: 40px;
 }
 
-nav ul {
-    list-style: none;
+.nav-align ul {
     display: flex;
-    gap: 20px;
+    gap: 40px;
+}
+
+.nav-2 {
+    width: 200px;
+    padding: 20px 0 20px 0;
+
+}
+
+.nav-2 ul a {
+    color: var(--links);
+}
+
+.nav-2 ul li {
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+
+.nav-2 ul li:hover {
+    border-top: 1px solid var(--navHover);
+    border-bottom: 1px solid var(--navHover);
+}
+
+.main-container {
+    display: flex;
+    height: calc(100vh - 80px);
+}
+
+.left-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid rgba(0, 0, 0, 0.096);
+}
+
+.menu-logout {
+    justify-content: space-between;
+    display: flex;
+    padding: 10px;
+}
+
+.add-menu {
+    border-top: 1px solid rgba(0, 0, 0, 0.100);
+}
+
+/* MAIN ------------------------------- */
+
+/* FOOTER ----------------------------- */
+footer {
+    display: flex;
+    position: fixed;
+    left: 200px;
+    bottom: 0;
+    right: 0;
+    width: auto;
     color: white;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Styles pour les en-têtes */
-h1 {
-    color: #333;
-}
-
-h2 {
-    color: #555;
-}
-
-/* Styles pour les liens */
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Styles pour les listes et les tableaux */
-ul,
-ol {
-    list-style: none;
-}
-
-table {
-    width: 50%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table,
-th,
-td {
-    border: 1px solid #ccc;
-}
-
-th,
-td {
-    padding: 10px;
-    text-align: left;
-}
-
-/* Styles pour les boutons */
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+    height: 80px;
     text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.096);
 }
 
-.button:hover {
-    background-color: #0056b3;
+footer ul {
+    display: flex;
+    gap: 40px;
 }
 
-/* Styles pour les formulaires */
-form {
-    margin-bottom: 20px;
-}
-
-input[type="text"],
-input[type="number"] {
-    width: 50%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Styles pour les messages d'erreur ou de succès */
-.alert {
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-/* Styles pour les en-têtes de tableau */
-thead {
-    background-color: #007bff;
-    color: #fff;
-}
-
-/* Styles pour les boutons "Désinscrire" et "Inscrire" */
-.deregister-button,
-.register-button {
-    background-color: #dc3545;
-    color: #fff;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.register-button {
-    background-color: #28a745;
-}
-
-/* Ajoutez des styles personnalisés selon vos besoins */
-
-/* Styles pour les menus déroulants (select) */
-select {
-    width: 50%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    color: #333;
-}
-
-/* Styles pour les champs de date (input type=date) */
-input[type="date"] {
-    width: 50%;
-    /* Vous pouvez ajuster la largeur selon vos besoins */
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    color: #333;
-}
-
-/* Placeholder pour les champs de date (peut nécessiter un préfixe du fournisseur de navigateur) */
-input[type="date"]::placeholder {
-    color: #999;
+footer ul a {
+    color: black;
 }

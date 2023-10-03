@@ -21,16 +21,16 @@
             <td>{{ module.nomModule }}</td>
             <td>{{ module.categorie }}</td>
             <td>
-                <a style="color:#007bff;" href="{{ path('edit_module', {'id' : module.id}) }}">Editer</a> |
-                <a style="color:#007bff;" href="{{ path('delete_module', {'id' : module.id}) }}">Suppr</a>
+                <a href="{{ path('edit_module', {'id' : module.id}) }}">Editer</a> |
+                <a href="{{ path('delete_module', {'id' : module.id}) }}">Suppr</a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
-{% for  in  %}
-    {{  }}
+{% for categorie in modules %}
+    {{ categorie }} <br>
 {% endfor %}
 
 <a href="{{ path('new_module')}}">Ajouter un module</a> <br>

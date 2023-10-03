@@ -7,10 +7,10 @@
 <h1>Liste des stagiaires</h1>
 
 {% for stagiaire in stagiaires %}
-<div style="padding: 10px;">
+<div>
     <a href="{{ path('show_stagiaire', {'id' : stagiaire.id }) }}">{{ stagiaire }}</a>
     {% if app.user %}
-    <a style="color: brown;" href="{{ path('delete_stagiaire', {'id' : stagiaire.id}) }}">Supprimer</a>
+    <a href="{{ path('delete_stagiaire', {'id' : stagiaire.id}) }}">Supprimer</a>
     {% endif %}
     <br>
 </div>
