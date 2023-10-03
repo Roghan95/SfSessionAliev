@@ -6,7 +6,10 @@
 <h1>Liste des catégories</h1>
 
 {% for categorie in categories %}
-    <a href="{{ path('show_categorie', {'id' : categorie.id}) }}">{{ categorie }}</a> <br>
+<a href="{{ path('show_categorie', {'id' : categorie.id}) }}">{{ categorie }}</a>
+<a href="{{ path('delete_categorie', {'id' : categorie.id}) }}">Supprimer</a>
+<br>
 {% endfor %}
+<a href="{{ path('new_categorie') }}">Ajouter une catégorie</a>
 
 {% endblock %}

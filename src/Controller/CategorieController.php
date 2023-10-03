@@ -7,6 +7,7 @@ use App\Form\ModuleType;
 use App\Entity\Categorie;
 use App\Form\CategorieType;
 use App\Repository\CategorieRepository;
+use App\Repository\ModuleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ class CategorieController extends AbstractController
 {
     // Fonction permettant d'afficher toutes les catégories
     #[Route('/categorie', name: 'app_categorie')] // URL
-    public function index(CategorieRepository $categorieRepository): Response
+    public function index(CategorieRepository $categorieRepository, ModuleRepository $moduleRepository): Response
     {
         if($this->getUser()) {
         // Récupère toutes les catégories dans l'ordre alphabétique des noms de catégorie
@@ -25,11 +26,12 @@ class CategorieController extends AbstractController
         
         // Renvoie la vue 'categorie/index.html.twig' avec les catégories
         return $this->render('categorie/index.html.twig', [
-            'categories' => $categories,
+            'categories' => $categories
         ]);
     }
     return $this->redirectToRoute('app_login');
     }
+
      // Fonction permettant d'ajouter un module et l'éditer
      #[Route('/categorie/new', name: 'new_categorie')] // URL
      #[Route('/categorie/{id}/edit', name: 'edit_categorie')] // URL

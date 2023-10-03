@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Module;
 use App\Form\ModuleType;
+use App\Repository\CategorieRepository;
 use App\Repository\ModuleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,15 +16,16 @@ class ModuleController extends AbstractController
 {
     // Fonction permettant d'afficher tous les modules
     #[Route('/module', name: 'app_module')] // URL
-    public function index(ModuleRepository $moduleRepository): Response
+    public function index(ModuleRepository $moduleRepository, CategorieRepository $categorieRepository): Response
     {
         if($this->getUser()) {
         // Récupère tous les modules dans l'ordre alphabétique des noms de module
         $modules = $moduleRepository->findBy([], ['nomModule' => 'ASC']);
-
+        $categories = $categorieRepository->findBy([], ['nomCategorie' => 'ASC']);
         // Renvoie la vue 'module/index.html.twig' avec les modules
         return $this->render('module/index.html.twig', [
-            'modules' => $modules
+            'modules' => $modules,
+            'categories' => $categories
         ]);
     }
         return $this->redirectToRoute('app_login');
