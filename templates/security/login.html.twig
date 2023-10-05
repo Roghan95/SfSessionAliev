@@ -1,31 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}S'identifier{% endblock %}
+
+{% block meta %}Connexion{% endblock %}
+
+{% block mainTitle %}<h1>Connexion</h1>{% endblock %}
 
 {% block body %}
-<form method="post">
+<form method="post" class="login-form">
     {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
+    <h2 class="h3 mb-3 font-weight-normal">Identifie-toi</h2>
+    <p>Connecte-toi avec ton adresse email et ton mot de passe.</p>
+    <label for="inputEmail">Ton adresse e-mail*</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+        autocomplete="email" required autofocus>
+    <label for="inputPassword">Ton mot de passe*</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password"
+        required>
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-    
-    <input type="hidden" name="_csrf_token"
-    value="{{ csrf_token('authenticate') }}"
-    >
-    
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        Valider
     </button>
-    <p>Vous n'avez pas de compte ? <a href="{{ path('app_register') }}">S'inscrire </a> !</p>
+    <p>Pas de compte ? <a href="{{ path('app_register') }}">Inscrivez-vous</a> !</p>
 </form>
 {% endblock %}

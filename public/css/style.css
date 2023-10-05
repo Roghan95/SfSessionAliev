@@ -1,5 +1,5 @@
 * {
-    font-family: 'Roboto', sans-serif;    
+    font-family: 'Roboto', sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -8,10 +8,11 @@
 }
 
 :root {
-    --textA : white;
+    --textA: white;
     --navHover: #458FFF;
     --links: black;
 }
+
 /* NAV BAR --------------------------- */
 
 .nav-1 {
@@ -37,10 +38,17 @@
     gap: 40px;
 }
 
+.nav-align ul a {
+    color: var(--links);
+}
+
+.nav-align ul a:hover {
+    text-decoration: underline var(--navHover);
+}
+
 .nav-2 {
     width: 200px;
-    padding: 20px 0 20px 0;
-
+    padding: 10px 0 10px 0;
 }
 
 .nav-2 ul a {
@@ -50,6 +58,13 @@
 .nav-2 ul li {
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
+    padding: 15px;
+}
+
+.nav-2 ul li a {
+    display: flex;
+    text-align: center;
+    gap: 10px;
 }
 
 .nav-2 ul li:hover {
@@ -81,6 +96,146 @@
 
 /* MAIN ------------------------------- */
 
+/* LOGIN */
+
+.login-form h2 {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--navHover);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.100);
+    border-radius: 5px;
+    width: 450px;
+    height: auto;
+    margin: 100px auto 0 auto;
+}
+
+.login-form a {
+    color: var(--navHover);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.login-form a:hover {
+    text-decoration: underline var(--navHover);
+}
+
+.login-form p {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.100);
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+}
+
+.login-form input:focus {
+    filter: drop-shadow(0 0 0.20rem #458FFF);
+}
+
+.btn-primary {
+    background-color: #458FFF;
+    color: white;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+.btn-primary:hover {
+    filter: drop-shadow(0 0 0.75rem #458FFF);
+}
+
+/* REGISTER */
+
+.register-form h2 {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--navHover);
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.100);
+    border-radius: 5px;
+    width: 450px;
+    height: auto;
+    margin: 100px auto 0 auto;
+    text-align: center;
+}
+
+em {
+    font-size: 12px;
+}
+
+.register-form label {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.register-form a {
+    color: var(--navHover);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.register-form p {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.register-form a:hover {
+    text-decoration: underline var(--navHover);
+}
+
+.register-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.100);
+    border-radius: 5px;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.register-form input:focus {
+    filter: drop-shadow(0 0 0.20rem #458FFF);
+}
+
+.btn {
+    background-color: #458FFF;
+    color: white;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+.btn:hover {
+    filter: drop-shadow(0 0 0.75rem #458FFF);
+}
+
 /* FOOTER ----------------------------- */
 footer {
     display: flex;
@@ -104,4 +259,8 @@ footer ul {
 
 footer ul a {
     color: black;
+}
+
+footer ul a:hover {
+    text-decoration: underline black;
 }
