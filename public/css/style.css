@@ -87,7 +87,15 @@
 .menu-logout {
     justify-content: space-between;
     display: flex;
-    padding: 10px;
+    align-items: center;
+    padding: 10px 0px;
+    position: fixed;
+    bottom: 0px;
+    right: calc(100vw - 200px);
+    left: 0px;
+    width: 200px;
+    height: 80px;
+    background-color: white;
 }
 
 .add-menu {
@@ -255,6 +263,8 @@ footer {
     justify-content: center;
     align-items: center;
     border-top: 1px solid rgba(0, 0, 0, 0.096);
+    border-left: 1px solid rgba(0, 0, 0, 0.096);
+    background-color: white;
 }
 
 footer ul {
@@ -268,4 +278,9 @@ footer ul a {
 
 footer ul a:hover {
     text-decoration: underline black;
+}
+
+.main-content {
+    margin-bottom: 80px;
+    padding-left: 5px;
 }
